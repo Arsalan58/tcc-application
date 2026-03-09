@@ -257,7 +257,7 @@ function SplashScreen({ onNav }) {
       <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)", backgroundSize: "28px 28px", opacity: .6 }}/>
       <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "40px 30px", position: "relative", zIndex: 1 }}>
         <div style={{ animation: "float 4s ease-in-out infinite", marginBottom: 30 }}>
-          <div style={{ width: 96, height: 96, background: "rgba(255,255,255,0.13)", borderRadius: 28, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 50, boxShadow: "0 8px 32px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.18)" }}>📚</div>
+          <div style={{ width: 96, height: 96, background: "rgba(255,255,255,0.13)", borderRadius: 28, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 50, boxShadow: "0 8px 32px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.18)" }}><img src="/tcc.png" height={"100px"}></img></div>
         </div>
         <div style={{ textAlign: "center", marginBottom: 52, animation: "fadeUp .5s ease forwards" }}>
           <div style={{ color: "white", fontSize: 38, fontWeight: 900, letterSpacing: -1.5, fontFamily: F.display, lineHeight: 1.05, marginBottom: 8 }}>TCC Books</div>
@@ -289,7 +289,7 @@ function LoginScreen({ onNav, onLogin, state, setState }) {
     <div style={{ flex: 1, display: "flex", flexDirection: "column", background: C.bg, overflowY: "auto" }}>
       <GreenHero>
         <div style={{ paddingTop: 32, paddingBottom: 52, textAlign: "center" }}>
-          <div style={{ fontSize: 46, marginBottom: 14, animation: "float 4s ease-in-out infinite" }}>📚</div>
+          <div style={{ fontSize: 46, marginBottom: 14, animation: "float 4s ease-in-out infinite" }}><img src="/tcc.png" height={"150px"}></img></div>
           <div style={{ color: "white", fontSize: 27, fontWeight: 700, fontFamily: F.display, marginBottom: 6 }}>Welcome Back</div>
           <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 13, fontFamily: F.body }}>Sign in to your TCC Books account</div>
         </div>

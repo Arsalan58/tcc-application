@@ -230,10 +230,10 @@ const BOT = {
   list3:   {msg:"What genre best describes it?",opts:["Fiction","Non-Fiction","Sci-Fi","History","Self-Help","Biography","Classic"]},
   list4:   {msg:"What condition is the book in?",opts:["Like New","Good","Fair","Poor"]},
   list5:   {msg:"How would you like to offer it?",opts:["Borrow","Gift","Sell"]},
-  listOk:  {msg:"✅ Your book is live! The community can see it now.",opts:["List another","Done"]},
+  listOk:  {msg:" Your book is live! The community can see it now.",opts:["List another","Done"]},
   upd1:    {msg:"Which book to update? Type its title:",input:true},
   upd2:    {msg:"Set its new status:",opts:["Available","Borrowed","Gifted","Sold"]},
-  updOk:   {msg:"✅ Status updated successfully!",opts:["Update another","Done"]},
+  updOk:   {msg:" Status updated successfully!",opts:["Update another","Done"]},
   other:   {msg:"I can help with borrowing, reporting issues, or community guidelines.",opts:["Got it"]},
 };
 
@@ -361,7 +361,7 @@ function ForgotScreen({ onNav }) {
     <div style={{ flex: 1, display: "flex", flexDirection: "column", background: C.bg }}>
       <Header title="Reset Password" back onBack={() => onNav("login")}/>
       <div style={{ flex: 1, padding: 32, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ fontSize: 58, marginBottom: 18, animation: "float 3s ease-in-out infinite" }}>{sent ? "✅" : "🔑"}</div>
+        <div style={{ fontSize: 58, marginBottom: 18, animation: "float 3s ease-in-out infinite" }}>{sent ? "✔️" : "🔑"}</div>
         <div style={{ color: C.text, fontSize: 22, fontWeight: 700, marginBottom: 10, fontFamily: F.display }}>{sent ? "Link Sent!" : "Forgot Password?"}</div>
         <div style={{ color: C.textMuted, fontSize: 14, marginBottom: 36, fontFamily: F.body, lineHeight: 1.75, maxWidth: 280 }}>{sent ? `Check ${email} for instructions.` : "Enter your email and we'll send reset instructions."}</div>
         {!sent && <div style={{ width: "100%" }}><GInput placeholder="email@example.com" value={email} onChange={setEmail} icon="✉️"/><Btn label="Send Reset Link" onClick={() => email && setSent(true)} disabled={!email} icon="📤"/></div>}
@@ -404,7 +404,7 @@ function FeedScreen({ onNav, books, favs, onFav, user, notifCount, onBookSelect 
           </div>
         </div>
         <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-          {[{v:books.length,l:"Community Books",i:"📚"},{v:books.filter(b=>b.status==="Available").length,l:"Available Now",i:"✅"}].map((s,i) => (
+          {[{v:books.length,l:"Community Books",i:"📚"},{v:books.filter(b=>b.status==="Available").length,l:"Available Now",i:"✔️"}].map((s,i) => (
             <div key={i} style={{ flex: 1, background: "rgba(255,255,255,0.12)", borderRadius: 14, padding: "10px 14px", display: "flex", gap: 10, alignItems: "center", border: "1px solid rgba(255,255,255,0.1)" }}>
               <span style={{ fontSize: 18 }}>{s.i}</span>
               <div><div style={{ color: "white", fontSize: 18, fontWeight: 800, fontFamily: F.body, lineHeight: 1 }}>{s.v}</div><div style={{ color: "rgba(255,255,255,0.55)", fontSize: 10, fontFamily: F.body, marginTop: 2 }}>{s.l}</div></div>
@@ -593,7 +593,7 @@ function ProfileScreen({ onNav, user, myBooks }) {
 
 function EditProfileScreen({ onNav, user, setUser, showToast }) {
   const [form, setForm] = useState({name:user.name,username:user.username,email:user.email,bio:user.bio||""});
-  const save = () => { setUser(u => ({...u,...form})); showToast("✅ Profile updated!"); onNav("back"); };
+  const save = () => { setUser(u => ({...u,...form})); showToast("Profile updated!"); onNav("back"); };
   return (
     <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", background: C.bg }}>
       <Header title="Edit Profile" back onBack={() => onNav("back")} right={<button onClick={save} className="press" style={{ background: `linear-gradient(135deg,${C.primary},${C.primaryMid})`, border: "none", color: "white", borderRadius: 11, padding: "9px 16px", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: F.body, boxShadow: G_GREEN }}>Save</button>}/>
@@ -629,7 +629,7 @@ function FavouritesScreen({ onNav, books, favIds, onFav, onBookSelect }) {
 }
 
 function DashboardScreen({ onNav, myBooks }) {
-  const stats = [[myBooks.length,"Listed","📚",C.primary],[myBooks.filter(b=>b.status==="Borrowed").length,"Borrowed Out","🤝",C.info],[myBooks.filter(b=>b.status==="Gifted").length,"Gifted","🎁",C.success],[myBooks.filter(b=>b.status==="Available").length,"Available","✅",C.warning],[2,"Received","📤",C.gold],[0,"Sold","💰",C.danger]];
+  const stats = [[myBooks.length,"Listed","📚",C.primary],[myBooks.filter(b=>b.status==="Borrowed").length,"Borrowed Out","🤝",C.info],[myBooks.filter(b=>b.status==="Gifted").length,"Gifted","🎁",C.success],[myBooks.filter(b=>b.status==="Available").length,"Available","✔️",C.warning],[2,"Received","📤",C.gold],[0,"Sold","💰",C.danger]];
   return (
     <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", background: C.bg }}>
       <GreenHero><div style={{ paddingBottom: 18 }}><div style={{ color: "white", fontSize: 18, fontWeight: 700, fontFamily: F.display }}>My Dashboard</div><div style={{ color: "rgba(255,255,255,0.55)", fontSize: 12, fontFamily: F.body, marginTop: 2 }}>Track your book activity</div></div></GreenHero>
@@ -658,7 +658,7 @@ function DashboardScreen({ onNav, myBooks }) {
 function MyBooksScreen({ onNav, myBooks, setMyBooks, showToast }) {
   const [filter, setFilter] = useState("All"); const [expandId, setExpandId] = useState(null);
   const filtered = myBooks.filter(b => filter === "All" || b.status === filter);
-  const upd = (id, status) => { setMyBooks(bs => bs.map(b => b.id === id ? {...b,status} : b)); showToast(`✅ Status → "${status}"`); };
+  const upd = (id, status) => { setMyBooks(bs => bs.map(b => b.id === id ? {...b,status} : b)); showToast(` Status → "${status}"`); };
   return (
     <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", background: C.bg }}>
       <Header title="My Books" subtitle={`${myBooks.length} books`} back onBack={() => onNav("back")} right={<button onClick={() => onNav("chatbot")} className="press" style={{ background: `linear-gradient(135deg,${C.gold},${C.goldLight})`, border: "none", color: "white", borderRadius: 11, padding: "9px 14px", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: F.body, boxShadow: G_GOLD }}>+ Add</button>}/>
@@ -710,7 +710,7 @@ function ChatbotScreen({ onNav, myBooks, setMyBooks, showToast }) {
     else if (collecting?.step === "genre") { const d = {...collecting.data,genre:opt}; setCollecting({step:"condition",data:d}); setTimeout(() => add("bot", BOT.list4.msg, BOT.list4.opts), 400); }
     else if (collecting?.step === "condition") { const d = {...collecting.data,condition:opt}; setCollecting({step:"offer",data:d}); setTimeout(() => add("bot", BOT.list5.msg, BOT.list5.opts), 400); }
     else if (collecting?.step === "offer") { const d = {...collecting.data,offer:opt}; setMyBooks(b => [...b,{id:Date.now(),title:d.title,author:d.author,genre:d.genre,condition:d.condition,status:"Available",description:"Added via Book Bot."}]); setCollecting(null); showToast("📚 Book listed!"); setTimeout(() => add("bot", BOT.listOk.msg, BOT.listOk.opts), 400); }
-    else if (collecting?.step === "upd_status") { const t = collecting.data.title; setMyBooks(bs => bs.map(b => b.title.toLowerCase() === t.toLowerCase() ? {...b,status:opt} : b)); setCollecting(null); showToast(`✅ "${t}" → ${opt}`); setTimeout(() => add("bot", BOT.updOk.msg, BOT.updOk.opts), 400); }
+    else if (collecting?.step === "upd_status") { const t = collecting.data.title; setMyBooks(bs => bs.map(b => b.title.toLowerCase() === t.toLowerCase() ? {...b,status:opt} : b)); setCollecting(null); showToast(`✔️ "${t}" → ${opt}`); setTimeout(() => add("bot", BOT.updOk.msg, BOT.updOk.opts), 400); }
   };
   const send = () => {
     if (!input.trim()) return;
@@ -865,7 +865,7 @@ export default function Light() {
   const [user, setUser] = useState({name:"Sidharth",username:"sidharth_reads",email:"sarah@example.com",bio:"Book lover & storyteller 📚"});
   const [notifs, setNotifs] = useState([
     {icon:"💬",title:"New Message",body:"Rashid wants to borrow 'The Alchemist'",time:"2m ago",unread:true},
-    {icon:"✅",title:"Request Accepted",body:"Your borrow request for 'Dune' was approved",time:"1h ago",unread:true},
+    {icon:"✔️",title:"Request Accepted",body:"Your borrow request for 'Dune' was approved",time:"1h ago",unread:true},
     {icon:"📚",title:"New Book Listed",body:"Ali listed 'Educated' by Tara Westover",time:"3h ago",unread:false},
     {icon:"⏰",title:"Return Reminder",body:"Please return 'Atomic Habits' by Friday",time:"1d ago",unread:false},
     {icon:"🎁",title:"Gift Available",body:"Fatima is gifting 'The Kite Runner'",time:"2d ago",unread:false},
@@ -878,7 +878,7 @@ export default function Light() {
   };
   const toggleFav = id => setFavs(f => f.includes(id) ? f.filter(x => x !== id) : [...f, id]);
   const unread = notifs.filter(n => n.unread).length;
-  const handleRequest = (type, title) => { showToast(`✅ ${type} request sent for "${title}"!`); setNotifs(ns => [{icon:type==="Borrow"?"📤":"🎁",title:`${type} Request Sent`,body:`Requested to ${type.toLowerCase()} "${title}"`,time:"just now",unread:false},...ns]); };
+  const handleRequest = (type, title) => { showToast(` ${type} request sent for "${title}"!`); setNotifs(ns => [{icon:type==="Borrow"?"📤":"🎁",title:`${type} Request Sent`,body:`Requested to ${type.toLowerCase()} "${title}"`,time:"just now",unread:false},...ns]); };
   const allBooks = [...books, ...myBooks.map(b => ({...b,owner:"me",ownerName:user.name}))];
   const sp = {onNav:nav,showToast};
   const render = () => {
@@ -891,7 +891,7 @@ export default function Light() {
       case "feed":          return <FeedScreen {...sp} books={allBooks} favs={favs} onFav={toggleFav} user={user} notifCount={unread} onBookSelect={setSelectedBook}/>;
       case "search":        return <SearchScreen {...sp} books={allBooks} onBookSelect={setSelectedBook} onFav={toggleFav} favs={favs}/>;
       case "bookDetail":    return <BookDetailScreen {...sp} book={selectedBook} onFav={toggleFav} isFav={selectedBook && favs.includes(selectedBook.id)} onRequest={handleRequest}/>;
-      case "review":        return <ReviewScreen {...sp} book={selectedBook} onSubmit={() => showToast("✅ Review submitted!")}/>;
+      case "review":        return <ReviewScreen {...sp} book={selectedBook} onSubmit={() => showToast(" Review submitted!")}/>;
       case "profile":       return <ProfileScreen {...sp} user={user} myBooks={myBooks} setUser={setUser}/>;
       case "editProfile":   return <EditProfileScreen {...sp} user={user} setUser={setUser}/>;
       case "favourites":    return <FavouritesScreen {...sp} books={allBooks} favIds={favs} onFav={toggleFav} onBookSelect={setSelectedBook}/>;

@@ -1,5 +1,20 @@
 import { useState, useRef, useEffect } from "react";
 
+import {
+  Home,
+  Search,
+  BookOpen,
+  MessageCircle,
+  User,
+  Bell,
+  Heart,
+  Mail,
+  Lock,
+  Send,
+  Plus,
+  ArrowLeft,
+  ChevronDown
+} from "lucide-react";
 // ─── LIGHT MODE DESIGN TOKENS ─────────────────────────────────────────────
 const C = {
   bg:           "#F7F3EE",
@@ -96,22 +111,90 @@ function Header({ title, subtitle, back, onBack, right }) {
 
 // ─── BOTTOM NAV ───────────────────────────────────────────────────────────
 function BottomNav({ active, onNav }) {
-  const IC = "#5C6B63"; // visible dark grey-green for inactive icons
+  const IC = "#5C6B63";
+
   const tabs = [
-    { id: "feed",      label: "Feed",   icon: a => <svg width="22" height="22" viewBox="0 0 22 22"><path d="M3 9L11 2L19 9V19C19 19.55 18.55 20 18 20H14V14H8V20H4C3.45 20 3 19.55 3 19V9Z" fill={a ? C.primary : "none"} stroke={a ? C.primary : IC} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg> },
-    { id: "search",    label: "Search", icon: a => <svg width="22" height="22" viewBox="0 0 22 22"><circle cx="10" cy="10" r="6.5" stroke={a ? C.primary : IC} strokeWidth="1.8"/><path d="M15 15L19 19" stroke={a ? C.primary : IC} strokeWidth="1.8" strokeLinecap="round"/></svg> },
-    { id: "dashboard", label: "Shelf",  icon: a => <svg width="22" height="22" viewBox="0 0 22 22"><rect x="3" y="15" width="16" height="2" rx="1" fill={a ? C.primary : IC}/><rect x="5" y="5" width="3" height="10" rx="1" fill={a ? C.primary : IC}/><rect x="9.5" y="7" width="3" height="8" rx="1" fill={a ? C.primary : IC}/><rect x="14" y="4" width="3" height="11" rx="1" fill={a ? C.primary : IC}/></svg> },
-    { id: "chatbot",   label: "Chat",   icon: a => <svg width="22" height="22" viewBox="0 0 22 22"><path d="M19 4H3C2.45 4 2 4.45 2 5V15C2 15.55 2.45 16 3 16H7L11 20L15 16H19C19.55 16 20 15.55 20 15V5C20 4.45 19.55 4 19 4Z" fill={a ? C.primary : "none"} stroke={a ? C.primary : IC} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/><circle cx="7.5" cy="10.5" r="1.2" fill={a ? "white" : IC}/><circle cx="11" cy="10.5" r="1.2" fill={a ? "white" : IC}/><circle cx="14.5" cy="10.5" r="1.2" fill={a ? "white" : IC}/></svg> },
-    { id: "profile",   label: "Me",     icon: a => <svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="8" r="3.5" fill={a ? C.primary : "none"} stroke={a ? C.primary : IC} strokeWidth="1.8"/><path d="M4 19C4 15.69 7.13 13 11 13C14.87 13 18 15.69 18 19" stroke={a ? C.primary : IC} strokeWidth="1.8" strokeLinecap="round"/></svg> },
+    {
+      id: "feed",
+      label: "Feed",
+      icon: a => <Home size={22} color={a ? C.primary : IC} />
+    },
+    {
+      id: "search",
+      label: "Search",
+      icon: a => <Search size={22} color={a ? C.primary : IC} />
+    },
+    {
+      id: "dashboard",
+      label: "Shelf",
+      icon: a => <BookOpen size={22} color={a ? C.primary : IC} />
+    },
+    {
+      id: "chatbot",
+      label: "Chat",
+      icon: a => <MessageCircle size={22} color={a ? C.primary : IC} />
+    },
+    {
+      id: "profile",
+      label: "Me",
+      icon: a => <User size={22} color={a ? C.primary : IC} />
+    }
   ];
+
   return (
-    <div style={{ background: C.bgCard, borderTop: `1.5px solid ${C.border}`, display: "flex", padding: "8px 0 20px", flexShrink: 0 }}>
+    <div
+      style={{
+        background: C.bgCard,
+        borderTop: `1.5px solid ${C.border}`,
+        display: "flex",
+        padding: "8px 0 20px",
+        flexShrink: 0
+      }}
+    >
       {tabs.map(t => {
         const a = active === t.id;
+
         return (
-          <button key={t.id} onClick={() => onNav(t.id)} className="press" style={{ flex: 1, background: "none", border: "none", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
-            <div style={{ width: 44, height: 32, display: "flex", alignItems: "center", justifyContent: "center", background: a ? C.primaryFaint : "transparent", borderRadius: 12, transition: "all .2s" }}>{t.icon(a)}</div>
-            <span style={{ fontSize: 9.5, fontFamily: F.body, fontWeight: a ? 700 : 500, color: a ? C.primary : IC, letterSpacing: .3 }}>{t.label}</span>
+          <button
+            key={t.id}
+            onClick={() => onNav(t.id)}
+            className="press"
+            style={{
+              flex: 1,
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 4
+            }}
+          >
+            <div
+              style={{
+                width: 44,
+                height: 32,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: a ? C.primaryFaint : "transparent",
+                borderRadius: 12
+              }}
+            >
+              {t.icon(a)}
+            </div>
+
+            <span
+              style={{
+                fontSize: 9.5,
+                fontFamily: F.body,
+                fontWeight: a ? 700 : 500,
+                color: a ? C.primary : IC,
+                letterSpacing: 0.3
+              }}
+            >
+              {t.label}
+            </span>
           </button>
         );
       })}
@@ -155,7 +238,11 @@ function BookCard({ book, onPress, onFav, isFav }) {
           <StatusBadge status={book.status}/>
         </div>
       </div>
-      {onFav && <button onClick={e => { e.stopPropagation(); onFav(book.id); }} className="press" style={{ background: "none", border: "none", cursor: "pointer", fontSize: 19, padding: "4px 2px", color: isFav ? "#E74C3C" : C.textLight, flexShrink: 0, alignSelf: "center", transition: "color .2s" }}>{isFav ? "❤️" : "🤍"}</button>}
+      {onFav && <button onClick={e => { e.stopPropagation(); onFav(book.id); }} className="press" style={{ background: "none", border: "none", cursor: "pointer", fontSize: 19, padding: "4px 2px", color: isFav ? "#E74C3C" : C.textLight, flexShrink: 0, alignSelf: "center", transition: "color .2s" }}><Heart
+  size={18}
+  color={isFav ? "#E74C3C" : C.textLight}
+  fill={isFav ? "#E74C3C" : "none"}
+/></button>}
     </div>
   );
 }
@@ -257,7 +344,7 @@ function SplashScreen({ onNav }) {
       <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)", backgroundSize: "28px 28px", opacity: .6 }}/>
       <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "40px 30px", position: "relative", zIndex: 1 }}>
         <div style={{ animation: "float 4s ease-in-out infinite", marginBottom: 30 }}>
-          <div style={{ width: 96, height: 96, background: "rgba(255,255,255,0.13)", borderRadius: 28, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 50, boxShadow: "0 8px 32px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.18)" }}><img src="/tcc.png" height={"100px"}></img></div>
+          <div style={{ width: 96, height: 96, background: "rgba(255,255,255,0.13)", borderRadius: 28, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 50, boxShadow: "0 8px 32px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.18)" }}><img src="/tcc.png" height={"120px"}></img></div>
         </div>
         <div style={{ textAlign: "center", marginBottom: 52, animation: "fadeUp .5s ease forwards" }}>
           <div style={{ color: "white", fontSize: 38, fontWeight: 900, letterSpacing: -1.5, fontFamily: F.display, lineHeight: 1.05, marginBottom: 8 }}>TCC Books</div>
@@ -296,8 +383,8 @@ function LoginScreen({ onNav, onLogin, state, setState }) {
       </GreenHero>
       <div style={{ flex: 1, background: C.bg, borderRadius: "24px 24px 0 0", marginTop: -20, padding: "28px 24px 24px" }}>
         {err && <div style={{ background: "#FEF2F2", border: "1px solid #FECACA", borderRadius: 12, padding: "11px 15px", marginBottom: 18, color: C.danger, fontSize: 13, fontFamily: F.body }}>⚠️ {err}</div>}
-        <GInput label="Email Address" placeholder="you@example.com" value={state.email || ""} onChange={v => setState(s => ({...s, email: v}))} icon="✉️"/>
-        <GInput label="Password" type="password" placeholder="Your password" value={state.password || ""} onChange={v => setState(s => ({...s, password: v}))} icon="🔒"/>
+        <GInput label="Email Address" placeholder="you@example.com" value={state.email || ""} onChange={v => setState(s => ({...s, email: v}))} icon={<Mail size={18} />}/>
+        <GInput label="Password" type="password" placeholder="Your password" value={state.password || ""} onChange={v => setState(s => ({...s, password: v}))} icon={<Lock size={18} />}/>
         <div style={{ textAlign: "right", marginTop: -6, marginBottom: 22 }}>
           <span onClick={() => onNav("forgot")} style={{ color: C.primary, fontSize: 13, fontFamily: F.body, cursor: "pointer", fontWeight: 600 }}>Forgot Password?</span>
         </div>
@@ -318,8 +405,8 @@ function SignupScreen({ onNav, state, setState }) {
         <div style={{ marginBottom: 24 }}><div style={{ color: C.text, fontSize: 22, fontWeight: 700, fontFamily: F.display, marginBottom: 4 }}>Join the Community</div><div style={{ color: C.textMuted, fontSize: 13, fontFamily: F.body }}>Share books, discover stories</div></div>
         {err && <div style={{ background: "#FEF2F2", border: "1px solid #FECACA", borderRadius: 12, padding: "11px 15px", marginBottom: 16, color: C.danger, fontSize: 13, fontFamily: F.body }}>⚠️ {err}</div>}
         <GInput label="Full Name" placeholder="Your name" value={state.signupName || ""} onChange={v => setState(s => ({...s, signupName: v}))} icon="👤"/>
-        <GInput label="Email" placeholder="email@example.com" value={state.signupEmail || ""} onChange={v => setState(s => ({...s, signupEmail: v}))} icon="✉️"/>
-        <GInput label="Password" type="password" placeholder="Min. 6 characters" value={state.signupPass || ""} onChange={v => setState(s => ({...s, signupPass: v}))} icon="🔒"/>
+        <GInput label="Email" placeholder="email@example.com" value={state.signupEmail || ""} onChange={v => setState(s => ({...s, signupEmail: v}))} icon={<Mail size={18} />}/>
+        <GInput label="Password" type="password" placeholder="Min. 6 characters" value={state.signupPass || ""} onChange={v => setState(s => ({...s, signupPass: v}))} icon={<Lock size={18} />}/>
         <div onClick={() => setOk(o => !o)} style={{ background: ok ? C.primaryFaint : C.bgMuted, border: `1.5px solid ${ok ? C.primary : C.border}`, borderRadius: 14, padding: "13px 15px", display: "flex", alignItems: "center", gap: 12, cursor: "pointer", marginBottom: 20, transition: "all .2s" }}>
           <div style={{ width: 22, height: 22, borderRadius: 7, border: `2px solid ${ok ? C.primary : C.borderMid}`, background: ok ? C.primary : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all .2s" }}>{ok && <span style={{ color: "white", fontSize: 13, fontWeight: 800 }}>✓</span>}</div>
           <span style={{ fontSize: 13, color: C.textMid, fontFamily: F.body }}>I agree to <span style={{ color: C.primary, fontWeight: 600 }}>Terms & Privacy Policy</span></span>
@@ -364,7 +451,7 @@ function ForgotScreen({ onNav }) {
         <div style={{ fontSize: 58, marginBottom: 18, animation: "float 3s ease-in-out infinite" }}>{sent ? "✔️" : "🔑"}</div>
         <div style={{ color: C.text, fontSize: 22, fontWeight: 700, marginBottom: 10, fontFamily: F.display }}>{sent ? "Link Sent!" : "Forgot Password?"}</div>
         <div style={{ color: C.textMuted, fontSize: 14, marginBottom: 36, fontFamily: F.body, lineHeight: 1.75, maxWidth: 280 }}>{sent ? `Check ${email} for instructions.` : "Enter your email and we'll send reset instructions."}</div>
-        {!sent && <div style={{ width: "100%" }}><GInput placeholder="email@example.com" value={email} onChange={setEmail} icon="✉️"/><Btn label="Send Reset Link" onClick={() => email && setSent(true)} disabled={!email} icon="📤"/></div>}
+        {!sent && <div style={{ width: "100%" }}><GInput placeholder="email@example.com" value={email} onChange={setEmail} icon={<Mail size={18} />}/><Btn label="Send Reset Link" onClick={() => email && setSent(true)} disabled={!email} icon="📤"/></div>}
         {sent && <div style={{ width: "100%" }}><Btn label="Back to Login" variant="outline" onClick={() => onNav("login")} icon="←"/></div>}
       </div>
     </div>
@@ -476,7 +563,11 @@ function BookDetailScreen({ onNav, book, onFav, isFav, onRequest }) {
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 0 }}>
           <button onClick={() => onNav("back")} className="press" style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.2)", width: 36, height: 36, borderRadius: 11, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}><svg width="18" height="18" viewBox="0 0 18 18"><path d="M11 14L6 9L11 4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></button>
           <span style={{ color: "white", fontSize: 16, fontWeight: 700, flex: 1, fontFamily: F.display }}>Book Details</span>
-          <button onClick={() => onFav(book.id)} className="press" style={{ background: isFav ? "rgba(220,38,38,0.2)" : "rgba(255,255,255,0.15)", border: `1px solid ${isFav ? "rgba(220,38,38,0.4)" : "rgba(255,255,255,0.2)"}`, width: 36, height: 36, borderRadius: 11, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 17 }}>{isFav ? "❤️" : "🤍"}</button>
+          <button onClick={() => onFav(book.id)} className="press" style={{ background: isFav ? "rgba(220,38,38,0.2)" : "rgba(255,255,255,0.15)", border: `1px solid ${isFav ? "rgba(220,38,38,0.4)" : "rgba(255,255,255,0.2)"}`, width: 36, height: 36, borderRadius: 11, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 17 }}><Heart
+  size={18}
+  color={isFav ? "#E74C3C" : C.textLight}
+  fill={isFav ? "#E74C3C" : "none"}
+/></button>
         </div>
         <div style={{ display: "flex", gap: 18, alignItems: "flex-end", paddingTop: 18, paddingBottom: 28 }}>
           <BookCover title={book.title} emoji={emos[book.title] || "📖"} size={88} height={124}/>
@@ -604,7 +695,7 @@ function EditProfileScreen({ onNav, user, setUser, showToast }) {
         </div>
         <GInput label="Full Name" value={form.name} onChange={v => setForm(f => ({...f,name:v}))} icon="👤"/>
         <GInput label="Username" value={form.username} onChange={v => setForm(f => ({...f,username:v}))} icon="@"/>
-        <GInput label="Email" value={form.email} onChange={v => setForm(f => ({...f,email:v}))} icon="✉️"/>
+        <GInput label="Email" value={form.email} onChange={v => setForm(f => ({...f,email:v}))} icon={<Mail size={18} />}/>
         <div style={{ marginBottom: 14 }}>
           <div style={{ fontSize: 11, color: C.textMuted, fontFamily: F.body, marginBottom: 6, fontWeight: 700, textTransform: "uppercase", letterSpacing: .9 }}>Bio</div>
           <textarea value={form.bio} onChange={e => setForm(f => ({...f,bio:e.target.value}))} placeholder="Tell us about yourself..." style={{ width: "100%", background: C.bgCard, border: `1.5px solid ${C.border}`, borderRadius: 13, padding: "13px 15px", fontSize: 14, color: C.text, fontFamily: F.body, resize: "none", outline: "none", boxSizing: "border-box", minHeight: 90, lineHeight: 1.6 }} onFocus={e => { e.target.style.borderColor = C.primary; e.target.style.boxShadow = `0 0 0 3px ${C.primaryPale}`; }} onBlur={e => { e.target.style.borderColor = C.border; e.target.style.boxShadow = "none"; }}/>
@@ -822,7 +913,7 @@ function AboutScreen({ onNav }) {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 24 }}>
           {[["1,247","Books Listed"],["342","Active Readers"],["15","Communities"],["892","Books Shared"]].map(([v,l],i) => <div key={i} style={{ background: C.bgCard, borderRadius: 18, padding: "18px 14px", border: `1px solid ${C.border}`, boxShadow: S_SM }}><div style={{ fontSize: 22, fontWeight: 800, color: C.primary, fontFamily: F.body, marginBottom: 4 }}>{v}</div><div style={{ fontSize: 12, color: C.textMuted, fontFamily: F.body }}>{l}</div></div>)}
         </div>
-        <Btn label="Contact Us" variant="outline" icon="✉️" onClick={() => {}}/>
+        <Btn label="Contact Us" variant="outline" icon={<Mail size={18} />} onClick={() => {}}/>
       </div>
     </div>
   );
